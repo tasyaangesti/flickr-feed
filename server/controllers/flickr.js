@@ -1,6 +1,6 @@
 const axios = require("axios");
 const FLICKR_API_URL =
-  "https://api.flickr.com/services/feeds/photos_public.gne";
+  "https://www.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1";
 
 class Flickr {
   static async getData(req, res) {
@@ -23,7 +23,7 @@ class Flickr {
         throw { code: 404, message: "data not found" };
       }
 
-      const search = await axios.get(`${FLICKR_API_URL}?tags=${tags}`);
+      const search = await axios.get(`${FLICKR_API_URL}&tags=${tags}`);
       res.status(200).json(search.data);
     } catch (error) {
       console.error("error:", error);
