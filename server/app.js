@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const Flickr = require("./controllers/flickr");
 const cors = require("cors");
