@@ -18,7 +18,13 @@ class Flickr {
         return res.status(200).json(JSON.parse(cachedData));
       }
 
-      const response = await axios.get(FLICKR_API_URL);
+      const response = await axios.get(FLICKR_API_URL, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "User-Agent": "PostmanRuntime/7.37.3",
+        },
+      });
       await setAsync(cacheKey, JSON.stringify(response.data), "EX", 3600);
       console.log("cache miss for getData", response.data);
       res.status(200).json(response.data);
@@ -43,7 +49,13 @@ class Flickr {
       }
 
       const searchUrl = `${FLICKR_API_URL}&tags=${tags}`;
-      const response = await axios.get(searchUrl);
+      const response = await axios.get(searchUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "User-Agent": "PostmanRuntime/7.37.3",
+        },
+      });
       await setAsync(cacheKey, JSON.stringify(response.data), "EX", 3600);
       console.log("cache miss for searchData", response.data);
       res.status(200).json(response.data);
