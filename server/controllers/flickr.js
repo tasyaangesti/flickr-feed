@@ -7,6 +7,7 @@ const setAsync = promisify(redis.set).bind(redis);
 
 const FLICKR_API_URL =
   "https://www.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1";
+const USER_AGENT = "PostmanRuntime/7.37.3";
 
 class Flickr {
   static async getData(req, res) {
@@ -22,7 +23,7 @@ class Flickr {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
-          "User-Agent": "PostmanRuntime/7.37.3",
+          "User-Agent": USER_AGENT,
         },
       });
       await setAsync(cacheKey, JSON.stringify(response.data), "EX", 3600);
@@ -53,7 +54,7 @@ class Flickr {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
-          "User-Agent": "PostmanRuntime/7.37.3",
+          "User-Agent": USER_AGENT,
         },
       });
       await setAsync(cacheKey, JSON.stringify(response.data), "EX", 3600);
